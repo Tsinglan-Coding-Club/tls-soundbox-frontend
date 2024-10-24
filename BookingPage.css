@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Bar */
+.navbar {
+    height: 40px;
+    width: 100%;
+    background-color: #333;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo styling */
+.logo {
+    width: 90px; /* Set this to the width of your logo */
+}
+
+/* Navigation Links */
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 23px;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.navbar a.active {
+    background-color: lightskyblue;
+    color: white;
+}
+
+/* Button Styling */
+button {
+    background-color: lightskyblue;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s linear;
+}
+
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* Date selector area */
+#dateSelector {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Blue area for table */
+#tableContainer {
+    width: 80%;
+    /*height: 80%;*/
+    background-color: whitesmoke;
+    opacity: 1;
+    border-radius: 25px;
+    padding: 20px;
+    overflow-y: auto;
+    margin: 20px;
+}
+
+#highertablecontainer{
+    background-color: whitesmoke;
+    width: 80%;
+}
+/* Table styling */
+table {
+    width: 100%;
+    border-spacing: 10px;
+    border-collapse: collapse;
+    overflow: scroll;
+}
+
+th, td {
+/*    padding: 8px;*/
+    text-align: center;
+    border-left: none;
+    border-right: none;
+    border-bottom: 0px solid black;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+
+.status-btn {
+    width: 70px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    border-radius: 1px 1px ;
+}
+
+.status-btn:hover {
+    filter: brightness(85%);
+}
+
+.status-true {
+    background-color: seagreen;
+
+}
+
+.status-false {
+    background-color: orangered;
+}
+
+.status-chosen{
+    background-color: orange;
+}
+
+.status-passed{
+    background-color: dimgrey;
+}
+
+.status-passed:hover {
+    transform: scale(1);
+    filter: brightness(100%);
+}
+
+#noDataMessage {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+}

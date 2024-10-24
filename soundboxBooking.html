@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soundbox Booking</title>
+    <link rel="stylesheet" href="BookingPage.css">
+    <meta name="referrer" content="origin" />
 </head>
 <body>
-$END$
+<!--T-->
+<div class="navbar">;
+    <a href="https:/;/www.google.com">
+        <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Logo" class="logo">
+    </a>
+    <a href="soundboxBooking.html" class="active">Soundbox Booking</a>
+    <a href="registedSoundBox.html">Registed Soundbox</a>
+    <a href="#">Other Registration</a>
+</div>
+
+<!-- Date selector will be shown on page load -->
+<div id="dateSelector">
+    <label for="startDate">Select Date:</label>
+    <input type="date" id="startDate">
+    <button onclick="fetchData()">Search</button>
+</div>
+<div id="tableContainer">
+    <div id="noDataMessage">No date selected</div>
+    <table id="soundboxTable" style="display: none;" border="0" cellspacing="0" cellpadding="0" class=""></table>
+
+</div>
+<div styke="text-align:center">
+    <button onclick="submit()" >Submit</button>
+</div>
+<script src="soundboxBooking.js"></script>
 </body>
 </html>

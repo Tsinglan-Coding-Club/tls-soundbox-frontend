@@ -18,7 +18,7 @@ const timetable = [
 ];
 let selectedBlocks=[]
 window.onload = function() {
-    //document.cookie="token=eyJ0eXAiOiJKV1QiLCJub25jZSI6InVWdG5rb3l1YzA2MmRzb0RWSEE5ZzlqdWVlWjduRGt3d3BiMU9tTGFYOHMiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1jN2wzSXo5"
+    document.cookie="token=eyJ0eXAiOiJKV1QiLCJub25jZSI6IkJZbmU3a2MwekV5OG52ei1YVlJaQnB3QnE5WEZQZ1U0dEpjelVUZUN4YlEiLCJhbGciOiJSUzI1NiIsIng1dCI6IjNQYUs0RWZ5"
     let today = new Date();
     if(today.getHours() >= 18) {
         today.setDate(today.getDate()+1);
@@ -59,12 +59,12 @@ async function fetchData() {
     }
 }
 async function fetchSoundboxState(startDate, endDate) {
-    const queryUrl = `${url}?startDate=${startDate.replaceAll("-","")}&endDate=${endDate.replaceAll("-","")}&token=eyJ0eXAiOiJKV1QiLCJub25jZSI6Ing1MFV5REtTUzBzU2YwcUhGdGhxSnNXZ3BtTkR6QU5SR001WnBlV2J6cEUiLCJhbGciOiJSUzI1NiIsIng1dCI6IjNQYUs0RWZ5`;
+    const queryUrl = `${url}?startDate=${startDate.replaceAll("-","")}&endDate=${endDate.replaceAll("-","")}`;
 
     try {
         const response = await fetch(queryUrl, {
             method: 'GET',
-            credentials: 'omit',
+            credentials: 'include',
         });
         const result = await response.json();
         return result;

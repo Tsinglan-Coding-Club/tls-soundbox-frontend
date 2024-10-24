@@ -19,10 +19,14 @@ const timetable = [
 let selectedBlocks=[]
 window.onload = function() {
     //document.cookie="token=eyJ0eXAiOiJKV1QiLCJub25jZSI6InVWdG5rb3l1YzA2MmRzb0RWSEE5ZzlqdWVlWjduRGt3d3BiMU9tTGFYOHMiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1jN2wzSXo5"
-    const today = new Date().toISOString().split('T')[0];
+    let today = new Date();
+    if(today.getHours() >= 18) {
+        today.setDate(today.getDate()+1);
+    }
     const maxDate = new Date();
     maxDate.setDate(maxDate.getDate() + 3);
-    const maxDateString = maxDate.toISOString().split('T')[0];
+    const maxDateString = today.toISOString().split('T')[0];
+    today=today.toISOString().split('T')[0];
     document.getElementById('startDate').setAttribute('min', today);
     document.getElementById('startDate').setAttribute('max', maxDateString);
     document.getElementById('startDate').value = today;

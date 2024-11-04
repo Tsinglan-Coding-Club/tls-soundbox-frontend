@@ -1,7 +1,6 @@
 /*
 * Soundbox ID starts from 0
 * Block starts from 1*/
-const url = "https://soundbox.v1an.xyz/getSoundboxState";
 const IDpair = ['D101','D102','D103','D104','D105','D106','D107','D108','D109',"A101","A111","A777"]
 const timetable = [
     new Date().setHours(8, 40, 0, 0),
@@ -18,7 +17,7 @@ const timetable = [
 ];
 let selectedBlocks=[]
 window.onload = function() {
-    document.cookie="token=eyJ0eXAiOiJKV1QiLCJub25jZSI6IkJZbmU3a2MwekV5OG52ei1YVlJaQnB3QnE5WEZQZ1U0dEpjelVUZUN4YlEiLCJhbGciOiJSUzI1NiIsIng1dCI6IjNQYUs0RWZ5"
+    document.cookie="token=eyJ0eXAiOiJKV1QiLCJub25jZSI6ImtXN21XV0RRQ25NdHlXME8xYWN6STNacXc0Q1FZbUxOSy13UFdqeWxVbTQiLCJhbGciOiJSUzI1NiIsIng1dCI6IjNQYUs0RWZ5"
     let today = new Date();
     if(today.getHours() >= 18) {
         today.setDate(today.getDate()+1);
@@ -59,7 +58,8 @@ async function fetchData() {
     }
 }
 async function fetchSoundboxState(startDate, endDate) {
-    const queryUrl = `${url}?startDate=${startDate.replaceAll("-","")}&endDate=${endDate.replaceAll("-","")}`;
+    const geturl = "https://soundbox.v1an.xyz/getSoundboxState";
+    const queryUrl = `${geturl}?startDate=${startDate.replaceAll("-","")}}`;
 
     try {
         const response = await fetch(queryUrl, {

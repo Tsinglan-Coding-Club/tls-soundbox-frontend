@@ -15,6 +15,7 @@ const timetable = [
     new Date().setHours(17, 40, 0, 0),
     new Date().setHours(18, 35, 0, 0)
 ];
+const token="eyJ0eXAiOiJKV1QiLCJub25jZSI6ImtXN21XV0RRQ25NdHlXME8xYWN6STNacXc0Q1FZbUxOSy13UFdqeWxVbTQiLCJhbGciOiJSUzI1NiIsIng1dCI6IjNQYUs0RWZ5"
 let selectedBlocks=[]
 window.onload = function() {
     document.cookie="token=eyJ0eXAiOiJKV1QiLCJub25jZSI6ImtXN21XV0RRQ25NdHlXME8xYWN6STNacXc0Q1FZbUxOSy13UFdqeWxVbTQiLCJhbGciOiJSUzI1NiIsIng1dCI6IjNQYUs0RWZ5"
@@ -66,6 +67,9 @@ async function fetchSoundboxState(startDate) {
         const response = await fetch(queryUrl, {
             method: 'GET',
             credentials: 'include',
+            headers:{
+                'token':token
+            }
         });
         const result = await response.json();
         return result;
@@ -153,6 +157,9 @@ async function submit(){
                 await fetch(queryUrlPOST, {
                     method: 'POST',
                     credentials: 'include',
+                    headers:{
+                        'token':token
+                    }
                 });
             } catch (e) {
                 console.error("Error on posting:", e);

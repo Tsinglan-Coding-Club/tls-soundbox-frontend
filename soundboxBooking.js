@@ -48,7 +48,7 @@ async function fetchData() {
         return;
     }
 
-    const data = await fetchSoundboxState(selectedDate, selectedDate);
+    const data = await fetchSoundboxState(selectedDate);
     if (data) {
         createTable(data, selectedDate);
         document.getElementById('noDataMessage').style.display = 'none';
@@ -57,10 +57,10 @@ async function fetchData() {
         document.getElementById('soundboxTable').style.display = 'none';
     }
 }
-async function fetchSoundboxState(startDate, endDate) {
+async function fetchSoundboxState(startDate) {
     const geturl = "https://soundbox.v1an.xyz/getSoundboxState";
-    const queryUrl = `${geturl}?startDate=${startDate.replaceAll("-","")}}`;
-
+    const queryUrl = `${geturl}?startDate=${startDate.replaceAll("-","")}`;
+    console.log(queryUrl);
     try {
         const response = await fetch(queryUrl, {
             method: 'GET',
@@ -114,7 +114,9 @@ function createTable(data,selectedDate) {
                 statusButton.classList.add('status-false');
             }
             statusButton.addEventListener('click', () => {
-                if (statusButton.classList.contains('status-true')) {
+                if(selectedBlocks.length>3) {
+                    window.alert("Too much time period has been selected.")
+                }else if (statusButton.classList.contains('status-true')) {
                     statusButton.classList.remove('status-true');
                     statusButton.classList.add('status-chosen');
                     selectedBlocks.push([statusButton.getAttribute('col'),statusButton.getAttribute('row')]);
@@ -134,15 +136,29 @@ function createTable(data,selectedDate) {
 
     document.getElementById('soundboxTable').style.display = 'table';
 }
+
 async function submit(){
-    // let urlPOST="https://soundbox.v1an.xyz/book";
-    // try {
-    //     await fetch(urlPOST, {
-    //         method: 'POST',
-    //         credentials: 'include',
-    //     });
-    // } catch (e) {
-    //     console.error("Error on posting:", e);
-    //     return null;
-    // }
+    const selectedDate = document.getElementById('startDate').value;
+    if(selectedBlocks.length<1){
+        document.getElementById('submitInfo').style.color='red';
+        document.getElementById('submitInfo').textContent = 'No time period is chosen.';
+    }else if(selectedBlocks.length>3){
+        document.getElementById('submitInfo').style.color='red';
+        document.getElementById('submitInfo').textContent = 'Too much time period is chosen.';
+    }else {
+        let urlPOST = "https://soundbox.v1an.xyz/book";
+        for (let i = 0; i < selectedBlocks.length; i++) {
+            const queryUrlPOST = `${urlPOST}?block=${selectedBlocks[i][1]}&date=${selectedDate.replaceAll("-", "")}&id=${selectedBlocks[i][0]}`;
+            try {
+                await fetch(queryUrlPOST, {
+                    method: 'POST',
+                    credentials: 'include',
+                });
+            } catch (e) {
+                console.error("Error on posting:", e);
+                return null;
+            }
+        }
+        location.reload();
+    }
 }

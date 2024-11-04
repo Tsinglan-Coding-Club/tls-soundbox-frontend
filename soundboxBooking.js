@@ -29,6 +29,7 @@ window.onload = function() {
     document.getElementById('startDate').setAttribute('min', today);
     document.getElementById('startDate').setAttribute('max', maxDateString);
     document.getElementById('startDate').value = today;
+    fetchData()
 };
 function listInclude(d,c,r){
     let flag=true
@@ -114,18 +115,17 @@ function createTable(data,selectedDate) {
                 statusButton.classList.add('status-false');
             }
             statusButton.addEventListener('click', () => {
-                if(selectedBlocks.length>3) {
+                if (statusButton.classList.contains('status-chosen')) {
+                    statusButton.classList.remove('status-chosen');
+                    statusButton.classList.add('status-true');
+                    selectedBlocks.splice(selectedBlocks.indexOf([statusButton.getAttribute('col'),statusButton.getAttribute('row')]),1)
+                }else if(selectedBlocks.length>=3) {
                     window.alert("Too much time period has been selected.")
                 }else if (statusButton.classList.contains('status-true')) {
                     statusButton.classList.remove('status-true');
                     statusButton.classList.add('status-chosen');
                     selectedBlocks.push([statusButton.getAttribute('col'),statusButton.getAttribute('row')]);
-                } else if (statusButton.classList.contains('status-chosen')) {
-                    statusButton.classList.remove('status-chosen');
-                    statusButton.classList.add('status-true');
-                    selectedBlocks.splice(selectedBlocks.indexOf([statusButton.getAttribute('col'),statusButton.getAttribute('row')]),1)
                 }
-                console.log(selectedBlocks);
             });
             buttonCell.appendChild(statusButton);
             row.appendChild(buttonCell);

@@ -103,7 +103,7 @@ function createTable(data,selectedDate) {
         const blockCell = document.createElement("td");
         blockCell.textContent = "B" + rowNum;
         row.appendChild(blockCell);
-        for (let colNum = 0; colNum < soundboxNum; colNum++) {
+        for (let colNum = 1; colNum < soundboxNum; colNum++) {
             const buttonCell = document.createElement("td");
             const statusButton = document.createElement("button");
             statusButton.classList.add('status-btn');
@@ -152,7 +152,7 @@ async function submit(){
     }else {
         let urlPOST = "https://soundbox.v1an.xyz/book";
         for (let i = 0; i < selectedBlocks.length; i++) {
-            const queryUrlPOST = `${urlPOST}?block=${selectedBlocks[i][1]}&date=${selectedDate.replaceAll("-", "")}&id=${selectedBlocks[i][0]+1}`;
+            const queryUrlPOST = `${urlPOST}?block=${selectedBlocks[i][1]}&date=${selectedDate.replaceAll("-", "")}&id=${selectedBlocks[i][0]}`;
             try {
                 await fetch(queryUrlPOST, {
                     method: 'POST',

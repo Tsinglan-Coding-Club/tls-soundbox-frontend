@@ -152,7 +152,7 @@ async function submit(){
     }else {
         let urlPOST = "https://soundbox.v1an.xyz/book";
         for (let i = 0; i < selectedBlocks.length; i++) {
-            const queryUrlPOST = `${urlPOST}?block=${selectedBlocks[i][1]}&date=${selectedDate.replaceAll("-", "")}&id=${selectedBlocks[i][0]}`;
+            const queryUrlPOST = `${urlPOST}?block=${selectedBlocks[i][1]}&date=${selectedDate.replaceAll("-", "")}&id=${selectedBlocks[i][0]+1}`;
             try {
                 await fetch(queryUrlPOST, {
                     method: 'POST',

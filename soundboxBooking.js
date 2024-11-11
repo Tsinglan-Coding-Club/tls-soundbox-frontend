@@ -161,11 +161,12 @@ async function submit(){
                         'token':token
                     }
                 });
+                location.reload();
             } catch (e) {
                 console.error("Error on posting:", e);
                 return null;
             }
         }
-        location.reload();
+
     }
 }

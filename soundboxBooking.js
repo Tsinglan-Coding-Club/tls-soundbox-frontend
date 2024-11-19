@@ -1,7 +1,7 @@
 /*
 * Soundbox ID starts from 0
 * Block starts from 1*/
-const IDpair = ['D101','D102','D103','D104','D105','D106','D107','D108','D109',"A101","A111","A777"]
+const IDpair = ['D101','D102','D103','D104','D105','D106','D107','D108','D109',"A101","A111"]
 const timetable = [
     new Date().setHours(8, 40, 0, 0),
     new Date().setHours(9, 20, 0, 0),
@@ -15,10 +15,9 @@ const timetable = [
     new Date().setHours(17, 40, 0, 0),
     new Date().setHours(18, 35, 0, 0)
 ];
-const token="eyJ0eXAiOiJKV1QiLCJub25jZSI6ImtXN21XV0RRQ25NdHlXME8xYWN6STNacXc0Q1FZbUxOSy13UFdqeWxVbTQiLCJhbGciOiJSUzI1NiIsIng1dCI6IjNQYUs0RWZ5"
 let selectedBlocks=[]
 window.onload = function() {
-    document.cookie="token=eyJ0eXAiOiJKV1QiLCJub25jZSI6ImtXN21XV0RRQ25NdHlXME8xYWN6STNacXc0Q1FZbUxOSy13UFdqeWxVbTQiLCJhbGciOiJSUzI1NiIsIng1dCI6IjNQYUs0RWZ5"
+    selectedBlocks=[]
     let today = new Date();
     if(today.getHours() >= 18) {
         today.setDate(today.getDate()+1);
@@ -67,9 +66,6 @@ async function fetchSoundboxState(startDate) {
         const response = await fetch(queryUrl, {
             method: 'GET',
             credentials: 'include',
-            headers:{
-                'token':token
-            }
         });
         const result = await response.json();
         return result;
@@ -156,10 +152,7 @@ async function submit(){
             try {
                 await fetch(queryUrlPOST, {
                     method: 'POST',
-                    credentials: 'include',
-                    headers:{
-                        'token':token
-                    }
+                    credentials: 'include'
                 });
                 location.reload();
             } catch (e) {

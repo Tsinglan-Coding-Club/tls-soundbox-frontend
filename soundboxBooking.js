@@ -66,8 +66,10 @@ async function fetchData() {
 
     const data = await fetchSoundboxState(selectedDate);
     const registed = await getRegisted();
+
     let registedToday=[]
     for(i=0;i<registed.length;i++){
+        selectedBlocks.push(registed[i]);
         if (registed[i][2].value==selectedDate.replaceAll("-","")){
             registedToday.push((registed[i][0],registed[i][1]));
         }

@@ -40,9 +40,24 @@ function listInclude(d,c,r){
     });
         return flag;
 }
+
+async function getRegisted(){
+    const geturl = "https://soundbox.v1an.xyz/getBookedSoundbox";
+    try {
+        const response = await fetch(queryUrl, {
+            method: 'GET',
+            credentials: 'include',
+        });
+        const result = await response.json();
+        return result;
+    } catch (e) {
+        console.error("Error fetching soundbox state:", e);
+        return null;
+    }
+}
 async function fetchData() {
     const selectedDate = document.getElementById('startDate').value;
-
+    console.log(selectedDate);
 
     if (!selectedDate) {
         alert("Please select a date.");
@@ -50,8 +65,15 @@ async function fetchData() {
     }
 
     const data = await fetchSoundboxState(selectedDate);
+    const registed = await getRegisted();
+    let registedToday=[]
+    for(i=0;i<registed.length;i++){
+        if (registed[i][2].value==selectedDate.replaceAll("-","")){
+            registedToday.push((registed[i][0],registed[i][1]));
+        }
+    }
     if (data) {
-        createTable(data, selectedDate);
+        createTable(data, selectedDate,registedToday);
         document.getElementById('noDataMessage').style.display = 'none';
     } else {
         document.getElementById('noDataMessage').textContent = 'No data available for the selected date';
@@ -61,7 +83,6 @@ async function fetchData() {
 async function fetchSoundboxState(startDate) {
     const geturl = "https://soundbox.v1an.xyz/getSoundboxState";
     const queryUrl = `${geturl}?startDate=${startDate.replaceAll("-","")}`;
-    console.log(queryUrl);
     try {
         const response = await fetch(queryUrl, {
             method: 'GET',
@@ -75,7 +96,7 @@ async function fetchSoundboxState(startDate) {
     }
 }
 
-function createTable(data,selectedDate) {
+function createTable(data,selectedDate,registedblock) {
     const date = new Date();
     const table = document.getElementById("soundboxTable");
     table.innerHTML = '';
@@ -111,7 +132,9 @@ function createTable(data,selectedDate) {
                 statusButton.classList.add('status-true');
                 statusButton.setAttribute('row', rowNum.toString());
                 statusButton.setAttribute('col', colNum.toString());
-            } else {
+            } else if (listInclude(registedblock, colNum, rowNum)) {
+                statusButton.classList.add('status-owned');
+            }else{
                 statusButton.classList.add('status-false');
             }
             statusButton.addEventListener('click', () => {

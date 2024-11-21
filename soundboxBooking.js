@@ -70,7 +70,7 @@ async function fetchData() {
     let registedToday=[]
     for(i=0;i<registed.length;i++){
         if (registed[i][2]==selectedDate.replaceAll("-","")){
-            registedToday.push((registed[i][0],registed[i][1]));
+            registedToday.push([registed[i][0],registed[i][1]]);
 
         }
     }

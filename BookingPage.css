@@ -187,25 +187,88 @@ th, td {
     margin-top: 10px;
 }
 
+/* Main container styles */
+#soundbox-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%; /* Space between blocks */
+    justify-content: center;
+    padding: 2%;
+}
+
+/* Soundbox block styles */
+.soundbox-block {
+    width: 22%; /* Adjust block size (responsive) */
+    aspect-ratio: 3/4; /* Maintain consistent proportions */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--block-bg-color, lightblue);
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+/* Hover effect for active blocks */
+.soundbox-block:hover {
+    transform: translateY(-5px);
+    background-color: #add8e6; /* Slightly darker blue */
+}
+
+/* Header styles */
+.block-header {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    padding: 5%;
+    background-color: var(--header-bg-color, #f4f4f4);
+    border-bottom: 1px solid #ddd;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Body styles */
+.block-body {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    font-weight: normal;
+    color: #333;
+}
+
+/* Footer styles */
+.block-footer {
+    padding: 5%;
+    text-align: center;
+    background-color: var(--footer-bg-color, #f9f9f9);
+    border-radius: 0 0 10px 10px;
+}
+
+/* Delete button */
 .delete-btn {
-    background-color: #f44336;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    background-color: #ff4d4f;
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 5px 10px;
     cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .delete-btn:hover {
-    background-color: #d32f2f;
+    background-color: #e63946;
 }
 
-/* No Data block styles */
+/* No data block styles */
 .no-data {
-    background-color: lightgrey;
+    background-color: #efefef;
+    color: #aaa;
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: #777;
-    font-size: 14px;
+    align-items: center;
+    font-size: 1em;
+    border: 2px dashed #ccc;
 }

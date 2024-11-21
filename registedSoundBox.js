@@ -36,7 +36,7 @@ function renderSoundboxes(data) {
 
         const blockDiv = document.createElement('div');
         blockDiv.className = 'soundbox-block';
-        blockDiv.style.backgroundColor = isPast ? 'lightgrey' : 'lightblue';
+        blockDiv.style.setProperty('--block-bg-color', isPast ? '#dcdcdc' : '#c1e1c5'); // Light grey for past, green for future
 
         // Header
         const header = document.createElement('div');
@@ -58,7 +58,7 @@ function renderSoundboxes(data) {
             const deleteBtn = document.createElement('button');
             deleteBtn.className = 'delete-btn';
             deleteBtn.innerText = 'Delete';
-            deleteBtn.addEventListener('click', () => handleDelete(soundboxID,time,blockIndex));
+            deleteBtn.addEventListener('click', () => handleDelete(soundboxID, time, blockIndex));
             footer.appendChild(deleteBtn);
 
             blockDiv.appendChild(footer);
@@ -94,13 +94,17 @@ function formatHeader(date, blockIndex) {
     return `${day}. ${dateNumber} ${blockLabel}`;
 }
 
-function handleDelete(soundboxID, date,block) {
-
-    fetch(`https://soundbox.v1an.xyz/unbook?block=${block}&date=${date}&id=${soundboxID}`,
-        { credentials: 'include',
-        method: 'POST'}
-    )
+function handleDelete(soundboxID, date, block) {
+    fetch(`https://soundbox.v1an.xyz/unbook?block=${block}&date=${date}&id=${soundboxID}`, {
+        credentials: 'include',
+        method: 'POST'
+    })
         .then((response) => response.json())
+        .then(() => {
+            alert(`Soundbox ${soundboxID} unbooked successfully.`);
+            fetchData(); // Refresh data after deletion
+        })
+        .catch(error => console.error('Error unbooking soundbox:', error));
 }
 
 // Fetch and render data on page load

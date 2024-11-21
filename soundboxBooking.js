@@ -72,8 +72,10 @@ async function fetchData() {
     for(i=0;i<registed.length;i++){
         if (registed[i][2]==selectedDate.replaceAll("-","")){
             registedToday.push((registed[i][0],registed[i][1]));
-            if(timetable[registed[i][1]]>today.getHours()){}
-            selectedBlocks.push(registed[i]);
+            if(timetable[registed[i][1]]>today.getHours()){
+                selectedBlocks.push(registed[i]);
+            }
+
         }
     }
     if (data) {

@@ -13,11 +13,16 @@ const timetable = [
 ];
 
 const container = document.getElementById('soundbox-container');
+function processSoundboxData(data) {
+    return data
+        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)) // Sort by time (descending)
+        .slice(0, 6); // Select only the latest 6 entries
+}
 
 function fetchData() {
     fetch('https://soundbox.v1an.xyz/getBookedSoundbox', { credentials: 'include' })
         .then(response => response.json())
-        .then(data => renderSoundboxes(data))
+        .then(data => renderSoundboxes(processSoundboxData(data)))
         .catch(error => console.error('Error fetching soundboxes:', error));
 }
 
@@ -105,6 +110,7 @@ function handleDelete(soundboxID, date, block) {
             fetchData(); // Refresh data after deletion
         })
         .catch(error => console.error('Error unbooking soundbox:', error));
+    location.reload();
 }
 
 // Fetch and render data on page load

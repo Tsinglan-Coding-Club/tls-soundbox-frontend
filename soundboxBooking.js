@@ -44,7 +44,7 @@ function listInclude(d,c,r){
 async function getRegisted(){
     const geturl = "https://soundbox.v1an.xyz/getBookedSoundbox";
     try {
-        const response = await fetch(queryUrl, {
+        const response = await fetch(geturl, {
             method: 'GET',
             credentials: 'include',
         });

@@ -149,3 +149,63 @@ th, td {
     color: #333;
     text-align: center;
 }
+
+/* Container for soundbox blocks */
+.soundbox-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    max-width: 80%;
+    margin: 20px auto;
+}
+
+/* Individual block styles */
+.soundbox-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    height: 150px;
+    text-align: center;
+}
+
+.block-header {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.block-body {
+    font-size: 14px;
+    color: #333;
+}
+
+.block-footer {
+    margin-top: 10px;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* No Data block styles */
+.no-data {
+    background-color: lightgrey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 14px;
+}

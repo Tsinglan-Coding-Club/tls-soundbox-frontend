@@ -32,12 +32,13 @@ window.onload = function() {
     fetchData()
 };
 function listInclude(d,c,r){
+    let flag=false;
     d.forEach((item)=>{
         if(((item.toString())==(([c,r]).toString()))) {
-            return true;
+            flag=true;
         }
     });
-        return false;
+        return flag;
 }
 
 async function getRegisted(){

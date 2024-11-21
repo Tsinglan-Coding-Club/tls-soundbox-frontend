@@ -32,13 +32,12 @@ window.onload = function() {
     fetchData()
 };
 function listInclude(d,c,r){
-    let flag=false
     d.forEach((item)=>{
         if(((item.toString())==(([c,r]).toString()))) {
-            flag=true;
+            return true;
         }
     });
-        return flag;
+        return false;
 }
 
 async function getRegisted(){
@@ -72,9 +71,6 @@ async function fetchData() {
     for(i=0;i<registed.length;i++){
         if (registed[i][2]==selectedDate.replaceAll("-","")){
             registedToday.push((registed[i][0],registed[i][1]));
-            if(timetable[registed[i][1]]>today.getHours()){
-                selectedBlocks.push(registed[i]);
-            }
 
         }
     }
@@ -140,6 +136,7 @@ function createTable(data,selectedDate,registedblock) {
                 statusButton.setAttribute('col', colNum.toString());
             } else if (listInclude(registedblock, colNum, rowNum)) {
                 statusButton.classList.add('status-owned');
+                selectedBlocks.push([colNum, rowNum]);
             }else{
                 statusButton.classList.add('status-false');
             }

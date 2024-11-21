@@ -32,10 +32,10 @@ window.onload = function() {
     fetchData()
 };
 function listInclude(d,c,r){
-    let flag=true
+    let flag=false
     d.forEach((item)=>{
         if(((item.toString())==(([c,r]).toString()))) {
-            flag=false;
+            flag=true;
         }
     });
         return flag;
@@ -70,7 +70,6 @@ async function fetchData() {
     let registedToday=[]
     let today = new Date();
     for(i=0;i<registed.length;i++){
-
         if (registed[i][2].value==selectedDate.replaceAll("-","")){
             registedToday.push((registed[i][0],registed[i][1]));
             if(timetable[registed[i][1]]>today.getHours()){}
@@ -133,7 +132,7 @@ function createTable(data,selectedDate,registedblock) {
             Select = new Date(selectedDate)
             if ((T < date) && (date.getDate() == Select.getDate())) {
                 statusButton.classList.add('status-passed');
-            } else if (listInclude(data, colNum, rowNum)) {
+            } else if (!listInclude(data, colNum, rowNum)) {
                 statusButton.classList.add('status-true');
                 statusButton.setAttribute('row', rowNum.toString());
                 statusButton.setAttribute('col', colNum.toString());

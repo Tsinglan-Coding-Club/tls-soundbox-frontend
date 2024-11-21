@@ -57,18 +57,17 @@ async function getRegisted(){
 }
 async function fetchData() {
     const selectedDate = document.getElementById('startDate').value;
-    console.log(selectedDate);
 
     if (!selectedDate) {
         alert("Please select a date.");
         return;
     }
+    selectedBlocks=[];
 
     const data = await fetchSoundboxState(selectedDate);
     const registed = await getRegisted();
 
     let registedToday=[]
-    let today = new Date();
     for(i=0;i<registed.length;i++){
         if (registed[i][2]==selectedDate.replaceAll("-","")){
             registedToday.push((registed[i][0],registed[i][1]));

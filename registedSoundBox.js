@@ -13,30 +13,28 @@ const timetable = [
 ];
 
 const container = document.getElementById('soundbox-container');
-function processSoundboxData(data) {
-    return data
-        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)) // Sort by time (descending)
-        .slice(0, 6); // Select only the latest 6 entries
-}
+
 
 function fetchData() {
     fetch('https://soundbox.v1an.xyz/getBookedSoundbox', { credentials: 'include' })
         .then(response => response.json())
-        .then(data => renderSoundboxes(processSoundboxData(data)))
+        .then(data => renderSoundboxes(data))
         .catch(error => console.error('Error fetching soundboxes:', error));
 }
 
 function renderSoundboxes(data) {
+    data=data.sort((a, b) => parseInt(b[2]) - parseInt(a[2]));
     container.innerHTML = ''; // Clear previous content
 
     const now = new Date().getTime();
     let count = 0;
 
     for (const booking of data) {
-        if (count >= 6) break;
+        if (count >= 12) break;
 
         const [soundboxID, blockIndex, time] = booking;
         const registrationDate = parseDateString(time); // Convert "20080226" to a Date object
+        registrationDate.setHours(timetable[blockIndex-1]);
         const isPast = registrationDate.getTime() < now;
 
         const blockDiv = document.createElement('div');
@@ -62,7 +60,7 @@ function renderSoundboxes(data) {
 
             const deleteBtn = document.createElement('button');
             deleteBtn.className = 'delete-btn';
-            deleteBtn.innerText = 'Delete';
+            deleteBtn.innerText = 'Unbook';
             deleteBtn.addEventListener('click', () => handleDelete(soundboxID, time, blockIndex));
             footer.appendChild(deleteBtn);
 
@@ -74,7 +72,7 @@ function renderSoundboxes(data) {
     }
 
     // Fill with "No Data" blocks if less than 6
-    while (count < 6) {
+    while (count < 12) {
         const noDataDiv = document.createElement('div');
         noDataDiv.className = 'soundbox-block no-data';
         noDataDiv.innerText = 'No Data';

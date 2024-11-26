@@ -33,8 +33,8 @@ function renderSoundboxes(data) {
         if (count >= 12) break;
 
         const [soundboxID, blockIndex, time] = booking;
-        const registrationDate = parseDateString(time); // Convert "20080226" to a Date object
-        registrationDate.setHours(timetable[blockIndex-1]);
+        let registrationDate = parseDateString(time); // Convert "20080226" to a Date object
+        registrationDate=registrationDate.setHours(timetable[blockIndex-1]);
         const isPast = registrationDate.getTime() < now;
 
         const blockDiv = document.createElement('div');

@@ -17,7 +17,7 @@ const timetable = [
 ];
 let selectedBlocks=[]
 window.onload = function() {
-    if(!document.cookie){
+    if(document.cookie.indexOf("token=")==-1){
         window.location.replace("/login_page.html")
     }
     selectedBlocks=[]

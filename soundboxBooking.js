@@ -17,6 +17,9 @@ const timetable = [
 ];
 let selectedBlocks=[]
 window.onload = function() {
+    if(!document.cookie){
+        window.location.replace("/login_page.html")
+    }
     selectedBlocks=[]
     let today = new Date();
     if(today.getHours() >= 18) {

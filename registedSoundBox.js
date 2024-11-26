@@ -1,15 +1,15 @@
 const timetable = [
-    new Date().setHours(8, 40, 0, 0),
-    new Date().setHours(9, 20, 0, 0),
-    new Date().setHours(10, 50, 0, 0),
-    new Date().setHours(11, 40, 0, 0),
-    new Date().setHours(12, 30, 0, 0),
-    new Date().setHours(14, 5, 0, 0),
-    new Date().setHours(14, 55, 0, 0),
-    new Date().setHours(15, 40, 0, 0),
-    new Date().setHours(16, 45, 0, 0),
-    new Date().setHours(17, 40, 0, 0),
-    new Date().setHours(18, 35, 0, 0)
+    [8, 40, 0, 0],
+    [9, 20, 0, 0],
+    [10, 50, 0, 0],
+    [11, 40, 0, 0],
+    [12, 30, 0, 0],
+    [14, 5, 0, 0],
+    [14, 55, 0, 0],
+    [15, 40, 0, 0],
+    [16, 45, 0, 0],
+    [17, 40, 0, 0],
+    [18, 35, 0, 0]
 ];
 
 const container = document.getElementById('soundbox-container');
@@ -34,7 +34,7 @@ function renderSoundboxes(data) {
 
         const [soundboxID, blockIndex, time] = booking;
         let registrationDate = parseDateString(time); // Convert "20080226" to a Date object
-        registrationDate=registrationDate.setHours(timetable[blockIndex-1]);
+        registrationDate.setHours(timetable[blockIndex-1][0],timetable[blockIndex-1][1],timetable[blockIndex-1][2],timetable[blockIndex-1][3]);
         const isPast = registrationDate.getTime() < now;
 
         const blockDiv = document.createElement('div');

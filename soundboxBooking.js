@@ -15,7 +15,8 @@ const timetable = [
     new Date().setHours(17, 40, 0, 0),
     new Date().setHours(18, 35, 0, 0)
 ];
-let selectedBlocks=[]
+let chosenBlocks=[];
+let selectedBlocks=[];
 window.onload = function() {
     selectedBlocks=[]
     let today = new Date();
@@ -137,7 +138,7 @@ function createTable(data,selectedDate,registedblock) {
                 statusButton.setAttribute('col', colNum.toString());
             } else if (listInclude(registedblock, colNum, rowNum)) {
                 statusButton.classList.add('status-owned');
-                selectedBlocks.push([colNum, rowNum]);
+                chosenBlocks.push([colNum, rowNum]);
             }else{
                 statusButton.classList.add('status-false');
             }
@@ -146,7 +147,7 @@ function createTable(data,selectedDate,registedblock) {
                     statusButton.classList.remove('status-chosen');
                     statusButton.classList.add('status-true');
                     selectedBlocks.splice(selectedBlocks.indexOf([statusButton.getAttribute('col'),statusButton.getAttribute('row')]),1)
-                }else if(selectedBlocks.length>=3) {
+                }else if((selectedBlocks.length+chosenBlocks.length)>=3) {
                     window.alert("Too much time period has been selected.")
                 }else if (statusButton.classList.contains('status-true')) {
                     statusButton.classList.remove('status-true');

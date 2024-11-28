@@ -17,9 +17,6 @@ const timetable = [
 ];
 let selectedBlocks=[]
 window.onload = function() {
-    if(document.cookie.indexOf("token=")==-1){
-        window.location.replace("/login_page.html")
-    }
     selectedBlocks=[]
     let today = new Date();
     if(today.getHours() >= 18) {
@@ -96,6 +93,7 @@ async function fetchSoundboxState(startDate) {
         const result = await response.json();
         return result;
     } catch (e) {
+        window.location.replace("/login_page.html");
         console.error("Error fetching soundbox state:", e);
         return null;
     }

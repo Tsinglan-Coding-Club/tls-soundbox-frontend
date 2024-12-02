@@ -118,16 +118,16 @@ th, td {
 }
 
 .status-true {
-    background-color: seagreen;
+    background-color: oklch(75.61% 0.1734 158.82);
 
 }
 
 .status-false {
-    background-color: orangered;
+    background-color: oklch(64.27% 0.2112 39.38);
 }
 
 .status-chosen{
-    background-color: orange;
+    background-color: oklch(75.61% 0.1734 58.24);
 }
 
 .status-passed{
@@ -135,7 +135,7 @@ th, td {
 }
 
 .status-owned{
-    background-color: lightskyblue;
+    background-color: oklch(75.61% 0.1734 220.33);
 }
 
 .status-passed:hover {

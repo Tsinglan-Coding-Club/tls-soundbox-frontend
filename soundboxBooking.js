@@ -68,7 +68,7 @@ async function fetchData() {
     const data = await fetchSoundboxState(selectedDate);
     console.log(data);
     if(data["error"]= "no token"){
-        window.location.replace("/");
+        //window.location.replace("/");
     }
     const registed = await getRegisted();
 

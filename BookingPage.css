@@ -42,13 +42,13 @@ body {
 }
 
 .navbar a.active {
-    background-color: lightskyblue;
+    background-color: oklch(80% 0.12 218.38);
     color: white;
 }
 
 /* Button Styling */
 button {
-    background-color: lightskyblue;
+    background-color: oklch(80% 0.12 218.38);
     border: none;
     border-radius: 20px;
     padding: 10px 20px;
@@ -58,9 +58,23 @@ button {
     transition: transform 0.2s linear;
 }
 
+button.inactive{
+    background-color: oklch(80% 0.02 218.38);
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: none;
+}
 
 button:hover {
     transform: scale(1.05);
+}
+
+button:hover.inactive{
+    transform: scale(1)
 }
 
 /* Date selector area */
@@ -68,6 +82,20 @@ button:hover {
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
+}
+
+#navigatorButtons {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#navigatorButtons > * {
+    min-width: 40px;
+    max-width: 20vw;
+    margin-right: 2.5vw;
+    margin-left: 2.5vw;
 }
 
 /* Blue area for table */
@@ -106,7 +134,7 @@ th, td {
 
 
 .status-btn {
-    width: 70px;
+    width: 80px;
     height: 50px;
     border: none;
     cursor: pointer;
@@ -118,16 +146,16 @@ th, td {
 }
 
 .status-true {
-    background-color: oklch(75.61% 0.1734 158.82);
+    background-color: oklch(80% 0.12 158.82);
 
 }
 
 .status-false {
-    background-color: oklch(64.27% 0.2112 39.38);
+    background-color: oklch(65% 0.12 39.38);
 }
 
 .status-chosen{
-    background-color: oklch(75.61% 0.1734 58.24);
+    background-color: oklch(80% 0.12 58.24);
 }
 
 .status-passed{
@@ -135,7 +163,7 @@ th, td {
 }
 
 .status-owned{
-    background-color: oklch(75.61% 0.1734 220.33);
+    background-color: oklch(80% 0.12 220.33);
 }
 
 .status-passed:hover {
@@ -151,7 +179,8 @@ th, td {
 
 /* General container styling */
 #soundbox-container {
-    display: grid;
+    display: flex;
+    flex-warp: wrap;
     grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
     gap: 16px;
     padding: 16px;

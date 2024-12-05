@@ -10,15 +10,17 @@
 <body>
 <!--T-->
 <div class="navbar">
-    <a href="https://www.google.com">
+    <a href="https://www.tsinglan.top">
         <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Logo" class="logo">
     </a>
-    <a href="soundboxBooking.html" class="active">Soundbox Booking</a>
-    <a href="registedSoundBox.html">Registed Soundbox</a>
     <a href="#">Other Registration</a>
 </div>
 
 <!-- Date selector will be shown on page load -->
+<div id="navigatorButtons">
+    <button class="inactive">Soundbox Booking</button>
+    <button>Registered Soundbox</button>
+</div>
 <div id="dateSelector">
     <label for="startDate">Select Date:</label>
     <input type="date" id="startDate">
@@ -27,11 +29,9 @@
 <div id="tableContainer">
     <div id="noDataMessage">No date selected</div>
     <table id="soundboxTable" style="display: none;" border="0" cellspacing="0" cellpadding="0" class=""></table>
-
 </div>
 <div styke="text-align:center">
     <button onclick="submit()" id="submitButton">Submit</button>
-
 </div>
 <label id="submitInfo" style="padding-top: 10px;"></label>
 <script src="soundboxBooking.js"></script>

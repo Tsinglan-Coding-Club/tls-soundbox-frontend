@@ -13,23 +13,26 @@
     <a href="https://www.tsinglan.top">
         <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Logo" class="logo">
     </a>
-    <a href="#">Other Registration</a>
+    <a id="username" href="#">-Username-</a>
 </div>
 
-<!-- Date selector will be shown on page load -->
 <div id="navigatorButtons">
     <button class="inactive">Soundbox Booking</button>
     <a href="RegisteredSoundBox.html"><button>Registered Soundbox</button></a>
 </div>
+
 <div id="dateSelector">
-    <label for="startDate">Select Date:</label>
-    <input type="date" id="startDate">
-    <button onclick="fetchData()">Search</button>
+    <button id="previousBtn" onclick="previousDate()" class="inactive"><</button>
+    <label><input type="date" id="startDate"></label>
+    <button id="nextBtn" onclick="nextDate()">></button>
+    <!--use '>' as arrow-->
 </div>
+
 <div id="tableContainer">
     <div id="noDataMessage">No date selected</div>
     <table id="soundboxTable" style="display: none;" border="0" cellspacing="0" cellpadding="0" class=""></table>
 </div>
+
 <div styke="text-align:center">
     <button onclick="submit()" id="submitButton">Submit</button>
 </div>

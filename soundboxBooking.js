@@ -59,15 +59,15 @@ function previousDate(){
     let d=parseDateString(displayedDate);
     d.setTime(d.getTime()-milisecondPerDay);
     document.getElementById('startDate').value = d.toISOString().split('T')[0];
-    if(d>currentDisplayDate){
-        document.getElementById('previousBtn').classList.remove('inactive');
-    }else{
+    if(d.getDate()<=currentDisplayDate.getDate()){
         document.getElementById('previousBtn').classList.add('inactive');
-    }
-    if(d<currentDisplayDate+3){
-        document.getElementById('nextBtn').classList.remove('inactive');
     }else{
+        document.getElementById('previousBtn').classList.remove('inactive');
+    }
+    if(d.getDate()>=(currentDisplayDate+2)){
         document.getElementById('nextBtn').classList.add('inactive');
+    }else{
+        document.getElementById('nextBtn').classList.remove('inactive');
     }
     fetchData();
 }
@@ -83,7 +83,7 @@ function nextDate(){
     }else{
         document.getElementById('previousBtn').classList.remove('inactive');
     }
-    if(d.getDate()>=(currentDisplayDate+2).getDate()){
+    if(d.getDate()>=(currentDisplayDate+2)){
         document.getElementById('nextBtn').classList.add('inactive');
     }else{
         document.getElementById('nextBtn').classList.remove('inactive');

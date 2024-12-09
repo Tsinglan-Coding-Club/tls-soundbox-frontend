@@ -27,6 +27,7 @@ let chosenBlocks=[];
 let selectedBlocks=[];
 let currentDisplayDate=new Date(); //current display date is today before 6p.m., tomorrow after 6p.m.. Do not change its value after it is set it onload
 let username="";
+let maxDate=new Date();
 window.onload = async function () {
     selectedBlocks = []
     let today = new Date();
@@ -34,6 +35,7 @@ window.onload = async function () {
         today.setDate(today.getDate() + 1);
     }
     currentDisplayDate.setDate(today.getDate());
+    maxDate.setDate(currentDisplayDate.getTime()+milisecondPerDay*2);
 
     today = today.toISOString().split('T')[0];
 
@@ -43,7 +45,6 @@ window.onload = async function () {
     fetchData();
     const userinfo = await getUserInfo();
     username=userinfo["name"];
-    console.log(username);
     document.getElementById('username').innerHTML=username;
 
 };
@@ -57,6 +58,9 @@ function listInclude(d,c,r){
         return flag;
 }
 function previousDate(){
+    if(document.getElementById('previousDate').classList.contains('inactive')){
+
+    }else{
     let displayedDate=document.getElementById('startDate').value;
     let d=parseDateString(displayedDate);
     d.setTime(d.getTime()-milisecondPerDay);
@@ -66,14 +70,17 @@ function previousDate(){
     }else{
         document.getElementById('previousBtn').classList.remove('inactive');
     }
-    if(d.getDate()>=(currentDisplayDate+2)){
+    if(d.getDate()>=maxDate.getDate()){
         document.getElementById('nextBtn').classList.add('inactive');
     }else{
         document.getElementById('nextBtn').classList.remove('inactive');
     }
-    fetchData();
+    fetchData();}
 }
 function nextDate(){
+    if(document.getElementById('previousDate').classList.contains('inactive')){
+
+    }else{
     let displayedDate=document.getElementById('startDate').value;
     let d=parseDateString(displayedDate);
     d.setTime(d.getTime()+milisecondPerDay);
@@ -85,12 +92,12 @@ function nextDate(){
     }else{
         document.getElementById('previousBtn').classList.remove('inactive');
     }
-    if(d.getDate()>=(currentDisplayDate+2)){
+    if(d.getDate()>=maxDate.getDate()){
         document.getElementById('nextBtn').classList.add('inactive');
     }else{
         document.getElementById('nextBtn').classList.remove('inactive');
     }
-    fetchData();
+    fetchData();}
 }
 async function getRegisted(){
     const geturl = `${serverUrl}getBookedSoundbox`;

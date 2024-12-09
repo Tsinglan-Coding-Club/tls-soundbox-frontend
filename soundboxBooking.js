@@ -1,6 +1,14 @@
 /*
 * Soundbox ID starts from 0
 * Block starts from 1*/
+function parseDateString(dateString) {
+    const year = parseInt(dateString.slice(0, 4), 10);
+    const month = parseInt(dateString.slice(5, 7), 10)-1; // Months are 0-based in JS
+    const day = parseInt(dateString.slice(8, 10), 10)+1; // don't know the reason of +1
+    return new Date(year, month, day);
+}
+const serverUrl="https://soundbox.v1an.xyz/";
+const milisecondPerDay=24 * 60 * 60 * 1000;
 const IDpair = ['D101','D102','D103','D104','D105','D106','D107','D108','D109',"A101","A111"]
 const timetable = [
     new Date().setHours(8, 40, 0, 0),
@@ -17,20 +25,28 @@ const timetable = [
 ];
 let chosenBlocks=[];
 let selectedBlocks=[];
-window.onload = function() {
-    selectedBlocks=[]
+let currentDisplayDate=new Date(); //current display date is today before 6p.m., tomorrow after 6p.m.. Do not change its value after it is set it onload
+let username="";
+let maxDate=new Date();
+window.onload = async function () {
+    selectedBlocks = []
     let today = new Date();
-    if(today.getHours() >= 18) {
-        today.setDate(today.getDate()+1);
+    if (today.getHours() >= 18) {
+        today.setDate(today.getDate() + 1);
     }
-    const maxDate = new Date();
-    maxDate.setDate(maxDate.getDate() + 3);
-    const maxDateString = today.toISOString().split('T')[0];
-    today=today.toISOString().split('T')[0];
+    currentDisplayDate.setDate(today.getDate());
+    maxDate.setDate(currentDisplayDate.getTime()+milisecondPerDay*2);
+
+    today = today.toISOString().split('T')[0];
+
     document.getElementById('startDate').setAttribute('min', today);
-    document.getElementById('startDate').setAttribute('max', maxDateString);
     document.getElementById('startDate').value = today;
-    fetchData()
+
+    fetchData();
+    const userinfo = await getUserInfo();
+    username=userinfo["name"];
+    document.getElementById('username').innerHTML=username;
+
 };
 function listInclude(d,c,r){
     let flag=false;
@@ -41,9 +57,50 @@ function listInclude(d,c,r){
     });
         return flag;
 }
+function previousDate(){
+    if(document.getElementById('previousDate').classList.contains('inactive')){
 
+    }else{
+    let displayedDate=document.getElementById('startDate').value;
+    let d=parseDateString(displayedDate);
+    d.setTime(d.getTime()-milisecondPerDay);
+    document.getElementById('startDate').value = d.toISOString().split('T')[0];
+    if(d.getDate()<=currentDisplayDate.getDate()){
+        document.getElementById('previousBtn').classList.add('inactive');
+    }else{
+        document.getElementById('previousBtn').classList.remove('inactive');
+    }
+    if(d.getDate()>=maxDate.getDate()){
+        document.getElementById('nextBtn').classList.add('inactive');
+    }else{
+        document.getElementById('nextBtn').classList.remove('inactive');
+    }
+    fetchData();}
+}
+function nextDate(){
+    if(document.getElementById('previousDate').classList.contains('inactive')){
+
+    }else{
+    let displayedDate=document.getElementById('startDate').value;
+    let d=parseDateString(displayedDate);
+    d.setTime(d.getTime()+milisecondPerDay);
+    console.log(d.getDate())
+    console.log(currentDisplayDate.getDate())
+    document.getElementById('startDate').value = d.toISOString().split('T')[0];
+    if(d.getDate()<=currentDisplayDate.getDate()){
+        document.getElementById('previousBtn').classList.add('inactive');
+    }else{
+        document.getElementById('previousBtn').classList.remove('inactive');
+    }
+    if(d.getDate()>=maxDate.getDate()){
+        document.getElementById('nextBtn').classList.add('inactive');
+    }else{
+        document.getElementById('nextBtn').classList.remove('inactive');
+    }
+    fetchData();}
+}
 async function getRegisted(){
-    const geturl = "https://soundbox.v1an.xyz/getBookedSoundbox";
+    const geturl = `${serverUrl}getBookedSoundbox`;
     try {
         const response = await fetch(geturl, {
             method: 'GET',
@@ -56,6 +113,21 @@ async function getRegisted(){
         return null;
     }
 }
+async function getUserInfo(){
+    const geturl = `${serverUrl}getUserInfo`;
+    try {
+        const response = await fetch(geturl, {
+            method: 'GET',
+            credentials: 'include',
+        });
+        const result = await response.json();
+        return result;
+    } catch (e) {
+        console.error("Error fetching soundbox state:", e);
+        return null;
+    }
+}
+
 async function fetchData() {
     const selectedDate = document.getElementById('startDate').value;
 
@@ -67,8 +139,8 @@ async function fetchData() {
 
     const data = await fetchSoundboxState(selectedDate);
     console.log(data);
-    if(data["error"]= "no token"){
-        //window.location.replace("/");
+    if(data["error"]== "no token"){
+        window.location.replace("/");
     }
     const registed = await getRegisted();
 
@@ -88,7 +160,7 @@ async function fetchData() {
     }
 }
 async function fetchSoundboxState(startDate) {
-    const geturl = "https://soundbox.v1an.xyz/getSoundboxState";
+    const geturl = `${serverUrl}getSoundboxState`;
     const queryUrl = `${geturl}?startDate=${startDate.replaceAll("-","")}`;
     try {
         const response = await fetch(queryUrl, {
@@ -178,7 +250,7 @@ async function submit(){
         document.getElementById('submitInfo').style.color='red';
         document.getElementById('submitInfo').textContent = 'Too much time period is chosen.';
     }else {
-        let urlPOST = "https://soundbox.v1an.xyz/book";
+        let urlPOST = `${serverUrl}book`;
         for (let i = 0; i < selectedBlocks.length; i++) {
             const queryUrlPOST = `${urlPOST}?block=${selectedBlocks[i][1]}&date=${selectedDate.replaceAll("-", "")}&id=${selectedBlocks[i][0]}`;
             try {

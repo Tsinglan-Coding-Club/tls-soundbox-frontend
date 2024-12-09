@@ -1,3 +1,10 @@
+function parseDateString(dateString) {
+    const year = parseInt(dateString.slice(0, 4), 10);
+    const month = parseInt(dateString.slice(4, 6), 10) - 1; // Months are 0-based in JS
+    const day = parseInt(dateString.slice(6, 8), 10);
+    return new Date(year, month, day);
+}
+
 const timetable = [
     [8, 40, 0, 0],
     [9, 20, 0, 0],
@@ -81,13 +88,6 @@ function renderSoundboxes(data) {
     }
 }
 
-function parseDateString(dateString) {
-    // Convert "20080226" to a Date object
-    const year = parseInt(dateString.slice(0, 4), 10);
-    const month = parseInt(dateString.slice(4, 6), 10) - 1; // Months are 0-based in JS
-    const day = parseInt(dateString.slice(6, 8), 10);
-    return new Date(year, month, day);
-}
 
 function formatHeader(date, blockIndex) {
     const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

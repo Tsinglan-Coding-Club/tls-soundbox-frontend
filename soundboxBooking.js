@@ -27,23 +27,25 @@ let chosenBlocks=[];
 let selectedBlocks=[];
 let currentDisplayDate=new Date(); //current display date is today before 6p.m., tomorrow after 6p.m.. Do not change its value after it is set it onload
 let username="";
-window.onload = function() {
-    selectedBlocks=[]
+window.onload = async function () {
+    selectedBlocks = []
     let today = new Date();
-    if(today.getHours() >= 18) {
-        today.setDate(today.getDate()+1);
+    if (today.getHours() >= 18) {
+        today.setDate(today.getDate() + 1);
     }
     currentDisplayDate.setDate(today.getDate());
 
-    today=today.toISOString().split('T')[0];
+    today = today.toISOString().split('T')[0];
 
     document.getElementById('startDate').setAttribute('min', today);
     document.getElementById('startDate').value = today;
 
-    fetchData()
-    username=getUserInfo();
+    fetchData();
+    const userinfo = await getUserInfo();
+    username=userinfo["name"];
+    console.log(username);
+    document.getElementById('username').innerHTML=username;
 
-    document.getElementById('username').value=username;
 };
 function listInclude(d,c,r){
     let flag=false;

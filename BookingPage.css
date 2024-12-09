@@ -146,12 +146,12 @@ th, td {
 }
 
 .status-true {
-    background-color: oklch(70% 0.12 158.82);
+    background-color: seagreen;
 
 }
 
 .status-false {
-    background-color: oklch(65% 0.12 39.38);
+    background-color: oklch(51.66% 0.1636 32.2);
 }
 
 .status-chosen{
@@ -215,7 +215,7 @@ th, td {
 
 .soundbox-block.future {
     background-color: #e0f7fa;
-    color: #00796b;
+    color: oklch(51.66% 0.093 181.08);
 }
 
 /* Header Styling */

@@ -66,14 +66,18 @@ function previousDate(){
     d.setTime(d.getTime()-milisecondPerDay);
     document.getElementById('startDate').value = d.toISOString().split('T')[0];
     if(d.getDate()<=currentDisplayDate.getDate()){
+        document.getElementById('previousBtn').classList.remove('active');
         document.getElementById('previousBtn').classList.add('inactive');
     }else{
         document.getElementById('previousBtn').classList.remove('inactive');
+        document.getElementById('previousBtn').classList.add('active');
     }
     if(d.getDate()>=maxDate.getDate()){
+        document.getElementById('nextBtn').classList.remove('active');
         document.getElementById('nextBtn').classList.add('inactive');
     }else{
         document.getElementById('nextBtn').classList.remove('inactive');
+        document.getElementById('nextBtn').classList.add('active');
     }
     fetchData();}
 }

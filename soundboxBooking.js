@@ -58,7 +58,7 @@ function listInclude(d,c,r){
         return flag;
 }
 function previousDate(){
-    if(document.getElementById('previousDate').classList.contains('inactive')){
+    if(document.getElementById('previousBtn').classList.contains('inactive')){
 
     }else{
     let displayedDate=document.getElementById('startDate').value;
@@ -82,7 +82,7 @@ function previousDate(){
     fetchData();}
 }
 function nextDate(){
-    if(document.getElementById('previousDate').classList.contains('inactive')){
+    if(document.getElementById('nextBtn').classList.contains('inactive')){
 
     }else{
     let displayedDate=document.getElementById('startDate').value;
